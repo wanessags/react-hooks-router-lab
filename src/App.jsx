@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Ex01Titulo from './pages/Ex01Titulo.jsx';
 import Ex02Resize from './pages/Ex02Resize.jsx';
 import Ex03Context from './pages/Ex03Context.jsx';
+import Ex04Counter from './pages/Ex04Counter.jsx';
 
 const paginas = [
   { caminho: '/', rotulo: 'Início' },
@@ -31,13 +32,16 @@ function PaginaEmConstrucao({ titulo }) {
 export default function App() {
   const { tema } = useContext(ThemeContext);
 
+  const classeTema =
+    tema === 'escuro' ? 'dark' :
+    tema === 'azul' ? 'blue' : '';
+
   return (
-    <div className={`layout ${
-      tema === 'escuro' ? 'dark' :
-      tema === 'azul' ? 'blue' : ''
-    }`}>
+    <div className={`layout ${classeTema}`}>
       <aside className="sidebar">
-        <div className="brand">⚛ Laboratório React</div>
+        <div className="brand">
+          ⚛ Laboratório React
+        </div>
 
         <p>5 exercícios demonstrativos</p>
 
@@ -59,7 +63,10 @@ export default function App() {
 
       <main className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
           <Route
             path="/exercicio-1"
@@ -76,15 +83,19 @@ export default function App() {
             element={<Ex03Context />}
           />
 
-          {paginas.slice(4).map((pagina) => (
-            <Route
-              key={pagina.caminho}
-              path={pagina.caminho}
-              element={
-                <PaginaEmConstrucao titulo={pagina.rotulo} />
-              }
-            />
-          ))}
+          <Route
+            path="/exercicio-4"
+            element={<Ex04Counter />}
+          />
+
+          <Route
+            path="/exercicio-5"
+            element={
+              <PaginaEmConstrucao
+                titulo="05 · Integração"
+              />
+            }
+          />
 
           <Route
             path="*"
