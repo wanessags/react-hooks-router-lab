@@ -9,6 +9,7 @@ import Ex01Titulo from './pages/Ex01Titulo.jsx';
 import Ex02Resize from './pages/Ex02Resize.jsx';
 import Ex03Context from './pages/Ex03Context.jsx';
 import Ex04Counter from './pages/Ex04Counter.jsx';
+import Ex05Favoritos from './pages/Ex05Favoritos.jsx';
 
 const paginas = [
   { caminho: '/', rotulo: 'Início' },
@@ -18,16 +19,6 @@ const paginas = [
   { caminho: '/exercicio-4', rotulo: '04 · Custom Hook' },
   { caminho: '/exercicio-5', rotulo: '05 · Integração' },
 ];
-
-function PaginaEmConstrucao({ titulo }) {
-  return (
-    <section className="panel">
-      <span className="eyebrow">Em desenvolvimento</span>
-      <h1>{titulo}</h1>
-      <p>Este exercício será implementado em breve.</p>
-    </section>
-  );
-}
 
 export default function App() {
   const { tema } = useContext(ThemeContext);
@@ -63,10 +54,7 @@ export default function App() {
 
       <main className="content">
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          <Route path="/" element={<Home />} />
 
           <Route
             path="/exercicio-1"
@@ -90,11 +78,7 @@ export default function App() {
 
           <Route
             path="/exercicio-5"
-            element={
-              <PaginaEmConstrucao
-                titulo="05 · Integração"
-              />
-            }
+            element={<Ex05Favoritos />}
           />
 
           <Route
@@ -102,6 +86,7 @@ export default function App() {
             element={
               <section className="panel">
                 <h1>Página não encontrada</h1>
+                <p>A página solicitada não existe.</p>
               </section>
             }
           />
