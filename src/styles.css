@@ -27,3 +27,13 @@ p, li { line-height: 1.65; }
 .actions { display: flex; flex-wrap: wrap; gap: 7px; }
 code { background: var(--bg); padding: .15em .3em; border-radius: 4px; }
 @media(max-width: 730px) { .layout { grid-template-columns: 1fr; } .sidebar { border-right: 0; border-bottom: 1px solid var(--border); padding: 18px; } nav { flex-direction: row; flex-wrap: wrap; } nav a { font-size: .84rem; } .content { padding: 18px; } }
+
+/* Tema azul - desafio Context API */
+.layout.blue {
+    --bg: #dbeafe;
+    --card: #eff6ff;
+    --text: #17346b;
+    --sub: #375d96;
+    --border: #93c5fd;
+  }
+  

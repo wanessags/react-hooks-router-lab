@@ -1,18 +1,23 @@
+
 import { createContext, useState } from 'react';
 
-// Cria o contexto: representa o tipo de dado compartilhado.
 export const ThemeContext = createContext(null);
 
+const temas = ['claro', 'escuro', 'azul'];
+
 export function ThemeProvider({ children }) {
-  // O estado fica no componente provedor, acima das páginas.
   const [tema, setTema] = useState('claro');
 
   function alternarTema() {
-    setTema((anterior) => (anterior === 'claro' ? 'escuro' : 'claro'));
+    setTema((anterior) => {
+      const indiceAtual = temas.indexOf(anterior);
+      const proximoIndice = (indiceAtual + 1) % temas.length;
+
+      return temas[proximoIndice];
+    });
   }
 
   return (
-    // Qualquer descendente pode ler 'tema' e 'alternarTema' usando useContext.
     <ThemeContext.Provider value={{ tema, alternarTema }}>
       {children}
     </ThemeContext.Provider>

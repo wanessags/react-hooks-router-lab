@@ -1,26 +1,14 @@
 
+import { useContext } from 'react';
 import { NavLink, Routes, Route } from 'react-router';
+
+import { ThemeContext } from './context/ThemeContext.jsx';
 
 import Home from './pages/Home.jsx';
 import Ex01Titulo from './pages/Ex01Titulo.jsx';
 import Ex02Resize from './pages/Ex02Resize.jsx';
+import Ex03Context from './pages/Ex03Context.jsx';
 
-// Componente para exercícios ainda não implementados
-function PaginaEmConstrucao({ titulo }) {
-  return (
-    <section className="panel">
-      <span className="eyebrow">Em desenvolvimento</span>
-
-      <h1>{titulo}</h1>
-
-      <p>
-        Este exercício será implementado nas próximas etapas.
-      </p>
-    </section>
-  );
-}
-
-// Páginas disponíveis no menu
 const paginas = [
   { caminho: '/', rotulo: 'Início' },
   { caminho: '/exercicio-1', rotulo: '01 · Effect: título' },
@@ -30,13 +18,27 @@ const paginas = [
   { caminho: '/exercicio-5', rotulo: '05 · Integração' },
 ];
 
-export default function App() {
+function PaginaEmConstrucao({ titulo }) {
   return (
-    <div className="layout">
+    <section className="panel">
+      <span className="eyebrow">Em desenvolvimento</span>
+      <h1>{titulo}</h1>
+      <p>Este exercício será implementado em breve.</p>
+    </section>
+  );
+}
 
-      {/* Menu lateral */}
+export default function App() {
+  const { tema } = useContext(ThemeContext);
+
+  return (
+    <div className={`layout ${
+      tema === 'escuro' ? 'dark' :
+      tema === 'azul' ? 'blue' : ''
+    }`}>
       <aside className="sidebar">
         <div className="brand">⚛ Laboratório React</div>
+
         <p>5 exercícios demonstrativos</p>
 
         <nav aria-label="Exercícios">
@@ -55,30 +57,26 @@ export default function App() {
         </nav>
       </aside>
 
-      {/* Conteúdo principal */}
       <main className="content">
         <Routes>
+          <Route path="/" element={<Home />} />
 
-          {/* Página inicial */}
-          <Route
-            path="/"
-            element={<Home />}
-          />
-
-          {/* Exercício 01 - useEffect */}
           <Route
             path="/exercicio-1"
             element={<Ex01Titulo />}
           />
 
-          {/* Exercício 02 - Resize e Cleanup */}
           <Route
             path="/exercicio-2"
             element={<Ex02Resize />}
           />
 
-          {/* Exercícios 03, 04 e 05 */}
-          {paginas.slice(3).map((pagina) => (
+          <Route
+            path="/exercicio-3"
+            element={<Ex03Context />}
+          />
+
+          {paginas.slice(4).map((pagina) => (
             <Route
               key={pagina.caminho}
               path={pagina.caminho}
@@ -88,19 +86,14 @@ export default function App() {
             />
           ))}
 
-          {/* Página não encontrada */}
           <Route
             path="*"
             element={
               <section className="panel">
                 <h1>Página não encontrada</h1>
-                <p>
-                  A página solicitada não existe.
-                </p>
               </section>
             }
           />
-
         </Routes>
       </main>
     </div>
